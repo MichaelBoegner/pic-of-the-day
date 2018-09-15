@@ -1,21 +1,53 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
+import { Route, withRouter } from 'react-router-dom';
+import { NavLink } from "react-router-dom";
+import Register from './components/Register';
 import './App.css';
 
+
+
 class App extends Component {
+  constructor(){
+    super();
+    this.state={
+
+    }
+  }
+
+
+onRegisterHandler = e => {
+  e.preventDefault(); 
+  <NavLink to="https://api.instagram.com/oauth/authorize/?client_id=CLIENT-ID&redirect_uri=REDIRECT-URI&response_type=code"/>
+}
+
+
+
   render() {
+    console.log('state', this.state)
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
-        </header>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
+      <div className="App">  
+        <div>
+          <NavLink to="/register">Register</NavLink>
+          <NavLink to="/login">Login</NavLink>
+          <NavLink to="/logout">Logout</NavLink>
+          <NavLink to="/users">Users</NavLink>
+        </div>
+
+      <div> 
+      <Route
+            path="/register"
+            render={props => (
+              <Register
+                {...props}
+                inputHandler={this.inputHandler}
+                onRegisterHandler={this.onRegisterHandler}
+              />
+            )}
+          />
       </div>
+    </div>
     );
   }
 }
 
-export default App;
+export default withRouter(App);
