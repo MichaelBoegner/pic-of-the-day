@@ -17,7 +17,7 @@ class App extends Component {
 
 onRegisterHandler = e => {
   e.preventDefault(); 
-  <NavLink to="https://api.instagram.com/oauth/authorize/?client_id=CLIENT-ID&redirect_uri=REDIRECT-URI&response_type=code"/>
+  this.props.history.push('/code');
 }
 
 
@@ -39,11 +39,14 @@ onRegisterHandler = e => {
             render={props => (
               <Register
                 {...props}
-                inputHandler={this.inputHandler}
                 onRegisterHandler={this.onRegisterHandler}
               />
             )}
           />
+
+      <Route 
+            path='/code' 
+            component={() => window.location = 'https://api.instagram.com/oauth/authorize/?client_id=CLIENT-ID&redirect_uri=REDIRECT-URI&response_type=code'}/>    
       </div>
     </div>
     );
